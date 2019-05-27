@@ -16,6 +16,7 @@ public class ApplicationService implements IApplicationService {
 		Integer total = 0;
 		for (Integer i :  valores) 
 			total += i;
+
 		return total;
 	}
 }

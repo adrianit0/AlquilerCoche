@@ -1,16 +1,12 @@
 package com.example.app;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.app.model.Libro;
 import com.example.app.servicio.IApplicationService;
-import com.example.app.servicio.MapperService;
 import com.example.app.servicio.OtherService;
 
-import DTO.LibroDTO;
 
 @SpringBootApplication
 public class AppApplication /*implements CommandLineRunner*/ {

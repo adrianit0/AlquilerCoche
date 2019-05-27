@@ -25,5 +25,5 @@ public class Coche {
 	
 	@ManyToMany (mappedBy = "coches", fetch = FetchType.LAZY)
 	private Set<Tarifa> tarifas = new HashSet<Tarifa>();
-	
+
 }
