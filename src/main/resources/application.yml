@@ -1,0 +1,15 @@
+spring:
+    jpa:
+        database: MYSQL
+        format-sql: true
+        hibernate:
+            ddl-auto: create
+            use-new-id-generator-mappings: true
+            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+
+    datasource:
+        url: jdbc:mysql://127.0.0.1:3306/alquilerCoches?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        username: root
+        password: root
+        driver-class-name: com.mysql.cj.jdbc.Driver
