@@ -4,9 +4,7 @@ spring:
         format-sql: true
         hibernate:
             ddl-auto: create
-            use-new-id-generator-mappings: true
-            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-
+            dialect: org.hibernate.dialect.MySQL55Dialect
 
     datasource:
         url: jdbc:mysql://127.0.0.1:3306/alquilerCoches?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC

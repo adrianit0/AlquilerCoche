@@ -3,8 +3,8 @@ package com.example.app.DTO;
 import lombok.Data;
 
 @Data
-public class ClienteDTO {
-    private String nombre;
-    private String apellidos;
+public class Client {
+    private Integer id;
     private String dni;
+    private String name;
 }

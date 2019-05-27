@@ -1,9 +1,14 @@
 package com.example.app.controller;
 
+import com.example.app.util.Constantes;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/alquiler")
+@RequestMapping(Constantes.URL_ALQUILER)
 public class AlquilerController {
+
+
+
 }
+
