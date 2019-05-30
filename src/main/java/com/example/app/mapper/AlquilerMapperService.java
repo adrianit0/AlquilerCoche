@@ -2,7 +2,10 @@ package com.example.app.mapper;
 
 import com.example.app.DTO.Rental;
 import com.example.app.model.Alquiler;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Component
 public class AlquilerMapperService implements MapperService<Rental, Alquiler> {
     @Override
     public Alquiler mapDtoToEntity(Rental dto) {

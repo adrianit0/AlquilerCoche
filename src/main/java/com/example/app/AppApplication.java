@@ -11,7 +11,7 @@ import com.example.app.servicio.OtherService;
 
 
 @SpringBootApplication
-public class AppApplication implements CommandLineRunner {
+public class AppApplication {
 	
 	@Autowired private IApplicationService servicio;
 	@Autowired private OtherService otroServicio;
@@ -23,14 +23,14 @@ public class AppApplication implements CommandLineRunner {
 		SpringApplication.run(AppApplication.class, args);
 	}
 
-	public void run (String... args) {
+	/*public void run (String... args) {
 		System.out.println(servicio.greetings());
 		Car coche = servicio.getCar();
 		if (coche!=null)
 			System.out.println(coche.getId());
 		else
 			System.out.println("Coche no encontrado");
-	}
+	}*/
 
 
 }

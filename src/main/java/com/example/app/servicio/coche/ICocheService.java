@@ -2,21 +2,19 @@ package com.example.app.servicio.coche;
 
 import com.example.app.DTO.Car;
 import com.example.app.model.Coche;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ICocheService {
-    Car findById(Integer id);
+    Optional<Coche> findById(Integer id);
 
-    List<Car> findAll(Integer page, Integer size);
+    Page<Coche> findAll(Integer page, Integer size);
 
-    Car create(Car cocheDTO);
+    Coche create(Coche entity);
 
-    void update(Car cocheDTO);
+    Coche update(Coche entity);
 
     void delete(Integer idCoche);
-
-    public Car map(Car cocheDTO);
-
-    public Car map(Coche cocheEntity);
 }

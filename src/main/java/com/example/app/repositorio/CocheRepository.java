@@ -1,6 +1,7 @@
 package com.example.app.repositorio;
 
 import com.example.app.model.Coche;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +19,8 @@ public interface CocheRepository extends JpaRepository<Coche, Integer> {
 
     List<Coche> findByMatriculaContaining (String n);
 
-    //List<Coche> findByMatriculaContaining(String n, Pageable pageable);
+    Page<Coche> findByMatriculaContaining(String n, Pageable pageable);
+
+    Page<Coche> findAll (Pageable pageable);
 
 }

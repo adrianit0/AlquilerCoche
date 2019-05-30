@@ -1,48 +1,44 @@
 package com.example.app.servicio.coche;
 
-import com.example.app.DTO.Car;
 import com.example.app.model.Coche;
+import com.example.app.repositorio.CocheRepository;
+import javassist.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CocheService implements ICocheService {
-    //FIXME: TERMINAR SERVICE
-
+    @Autowired
+    private CocheRepository cocheRepository;
 
     @Override
-    public Car findById(Integer id) {
+    public Optional<Coche> findById(Integer id) {
+        return cocheRepository.findOneById(id);
+    }
+
+    @Override
+    public Page<Coche> findAll(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return cocheRepository.findAll(pageable);
+    }
+
+    @Override
+    public Coche create(Coche entidad) {
         return null;
     }
 
     @Override
-    public List<Car> findAll(Integer page, Integer size) {
+    public Coche update(Coche entidad) {
         return null;
-    }
-
-    @Override
-    public Car create(Car cocheDTO) {
-        return null;
-    }
-
-    @Override
-    public void update(Car cocheDTO) {
-
     }
 
     @Override
     public void delete(Integer idCoche) {
-
-    }
-
-    @Override
-    public Car map(Car cocheDTO) {
-        return null;
-    }
-
-    @Override
-    public Car map(Coche cocheEntity) {
-        return null;
+        cocheRepository.deleteById(idCoche);
     }
 }

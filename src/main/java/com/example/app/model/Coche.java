@@ -1,5 +1,6 @@
 package com.example.app.model;
 
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +23,7 @@ public class Coche {
 	private String modelo;
 	private String color;
 	private Integer cilindradas;
+	private Date fechaRegistrado;
 	
 	@ManyToMany (mappedBy = "coches", fetch = FetchType.LAZY)
 	private Set<Tarifa> tarifas = new HashSet<Tarifa>();

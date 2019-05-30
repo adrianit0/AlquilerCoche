@@ -7,7 +7,7 @@ spring:
             dialect: org.hibernate.dialect.MySQL55Dialect
 
     datasource:
-        url: jdbc:mysql://127.0.0.1:3306/alquilerCoches?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        url: jdbc:mysql://127.0.0.1:3306/alquilercoches?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
         username: root
         password: root
         driver-class-name: com.mysql.cj.jdbc.Driver
