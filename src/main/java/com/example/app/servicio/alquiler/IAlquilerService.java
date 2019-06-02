@@ -1,22 +1,19 @@
 package com.example.app.servicio.alquiler;
 
-import com.example.app.DTO.Rental;
 import com.example.app.model.Alquiler;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IAlquilerService {
-    Rental findById(Integer id);
+    Optional<Alquiler> findById(Integer id);
 
-    List<Rental> findAll(Integer page, Integer size);
+    Page<Alquiler> findAll(Integer page, Integer size);
 
-    Rental create(Rental alquilerDTO);
+    Alquiler create(Alquiler alquiler);
 
-    void update(Rental alquilerDTO);
+    void update(Alquiler alquiler);
 
     void delete(Integer idAlquiler);
-
-    public Rental map(Rental alquilerDTO);
-
-    public Rental map(Alquiler alquilerEntity);
 }

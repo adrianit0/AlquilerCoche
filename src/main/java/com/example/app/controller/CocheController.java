@@ -32,10 +32,12 @@ public class CocheController {
 
     @GetMapping
     @ResponseBody
-    public Page<Car> getCoches (@RequestParam(name = Constantes.REQUEST_PARAM_PAGE, required = false, defaultValue = "0") Integer page,
-                                @RequestParam(name = Constantes.REQUEST_PARAM_SIZE, required = false, defaultValue = "0") Integer size) {
+    public Page<Car> getCochesByMatricula (
+                                @RequestParam(name = Constantes.REQUEST_PARAM_CARPLATE, required =  false, defaultValue = "") String matricula,
+                                @RequestParam(name = Constantes.REQUEST_PARAM_PAGE, required = false, defaultValue = "0") Integer page,
+                                @RequestParam(name = Constantes.REQUEST_PARAM_SIZE, required = false, defaultValue = "10") Integer size) {
 
-        Page<Coche> cochesEntidades = cocheService.findAll(page, size);
+        Page<Coche> cochesEntidades = cocheService.findByMatricula(matricula, page, size);
         return cochesEntidades.map(x -> cocheMapperService.mapEntityToDto(x));
     }
 
@@ -46,12 +48,17 @@ public class CocheController {
      * @return Respuesta con el servidor junto con el coche creado con su nueva id. (Codigos: 201, 400)
      * */
     public ResponseEntity<Car> insertCoche (@RequestBody Car dto) {
-        Optional<Coche> coche = Optional.of(dto)
+        // ID del coche, por si existe
+        Optional<Integer> idCoche = Optional.of(dto)
                 .map(cocheMapperService::mapDtoToEntity)
-                .map(v -> v.getId())
-                .flatMap(cocheService::findById);
+                .map(v -> v.getId());
 
-        if (coche.isPresent())
+        // Si existe el coche
+        Boolean existe = idCoche
+                .map(cocheService::existsById)
+                .orElse(false);
+
+        if (idCoche.isPresent() && existe)
             return ResponseEntity.badRequest().build();
 
         return Optional.of(dto)
@@ -59,24 +66,24 @@ public class CocheController {
                 .map(cocheService::create)
                 .map(cocheMapperService::mapEntityToDto)
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.badRequest().build());
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping
+    @PutMapping (value = Constantes.URL_BY_ID)
     /**
      * Actualiza el coche a partir de otro DTO. Devuelve error si el objeto a actualizar no existe
      * @param dto Coche a actualizar
      * @return Respuesta con el servidor junto con el coche actualizado. (Codigos: 200, 404)
      * */
-    public ResponseEntity<? extends Car> updateCoche (@RequestBody Car dto) {
-        Optional<Coche> coche = Optional.of(dto)
-                .map(cocheMapperService::mapDtoToEntity)
-                .map(v -> v.getId())
-                .flatMap(cocheService::findById);
+    public ResponseEntity<? extends Car> updateCoche (@PathVariable("id") Integer id, @RequestBody Car dto) {
+        Boolean existe = Optional.of(id)
+                .map(cocheService::existsById)
+                .orElse(false);
 
-        if (!coche.isPresent())
+        if (!existe)
             return ResponseEntity.notFound().build();
 
+        dto.setId(id);
         return Optional.of(dto)
                 .map(cocheMapperService::mapDtoToEntity)
                 .map(cocheService::update)
@@ -91,15 +98,16 @@ public class CocheController {
      * @param id ID del coche a eliminar
      * @return Respuesta con el servidor junto con el coche actualizado. (Codigos: 200, 400)
      * */
-    public ResponseEntity<? extends Car> deleteBook (@PathVariable Integer id) throws NotFoundException {
-        Optional<ResponseEntity> response = Optional.of(id)
-                .map(ResponseEntity::ok);
+    public ResponseEntity<? extends Car> deleteCar (@PathVariable Integer id) throws NotFoundException {
+        Boolean existe = Optional.of(id)
+                .map(cocheService::existsById)
+                .orElse(false);
 
-        if (response.isPresent())
+        if (!existe)
             return ResponseEntity.badRequest().build();
 
         cocheService.delete(id);
 
-        return response.orElse(ResponseEntity.badRequest().build());
+        return ResponseEntity.ok().build();
     }
 }

@@ -18,10 +18,7 @@ public class Cliente {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
 	private String nombre;
-	private String apellidos;
-	
 	private String dni;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")

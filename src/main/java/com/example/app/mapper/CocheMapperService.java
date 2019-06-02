@@ -35,6 +35,8 @@ public class CocheMapperService implements MapperService<Car, Coche> {
                 .orElse(0);
         dto.setRegistrationYear(Integer.toString(year));
 
+        System.out.println("DTO: " + dto);
+
         return dto;
     }
 }

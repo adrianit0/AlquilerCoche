@@ -10,7 +10,9 @@ import java.util.Optional;
 public interface ICocheService {
     Optional<Coche> findById(Integer id);
 
-    Page<Coche> findAll(Integer page, Integer size);
+    Boolean existsById (Integer id);
+
+    Page<Coche> findByMatricula (String matricula, Integer page, Integer size);
 
     Coche create(Coche entity);
 

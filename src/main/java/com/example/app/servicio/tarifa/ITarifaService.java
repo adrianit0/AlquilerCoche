@@ -1,22 +1,19 @@
 package com.example.app.servicio.tarifa;
 
-import com.example.app.DTO.Rental;
 import com.example.app.model.Tarifa;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ITarifaService {
-    Rental findById(Integer id);
+    Optional<Tarifa> findById(Integer id);
 
-    List<Rental> findAll(Integer page, Integer size);
+    Page<Tarifa> findAll(Integer page, Integer size);
 
-    Rental create(Rental cocheDTO);
+    Tarifa create(Tarifa tarifa);
 
-    void update(Rental cocheDTO);
+    void update(Tarifa tarifa);
 
-    void delete(Integer idCoche);
-
-    public Rental map(Rental cocheDTO);
-
-    public Rental map(Tarifa cocheEntity);
+    void delete(Integer idTarifa);
 }

@@ -20,9 +20,6 @@ public class Coche {
 	@GeneratedValue
 	private Integer id;
 	private String matricula;
-	private String modelo;
-	private String color;
-	private Integer cilindradas;
 	private Date fechaRegistrado;
 	
 	@ManyToMany (mappedBy = "coches", fetch = FetchType.LAZY)

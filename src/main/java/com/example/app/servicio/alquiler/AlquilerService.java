@@ -2,47 +2,46 @@ package com.example.app.servicio.alquiler;
 
 import com.example.app.DTO.Rental;
 import com.example.app.model.Alquiler;
+import com.example.app.repositorio.AlquilerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AlquilerService implements IAlquilerService {
-    //FIXME: TERMINAR SERVICE
 
+    @Autowired
+    private AlquilerRepository repository;
 
     @Override
-    public Rental findById(Integer id) {
-        return null;
+    public Optional<Alquiler> findById(Integer id) {
+        return repository.findById(id);
     }
 
     @Override
-    public List<Rental> findAll(Integer page, Integer size) {
-        return null;
+    public Page<Alquiler> findAll(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        return repository.findAll(pageable);
     }
 
     @Override
-    public Rental create(Rental alquilerDTO) {
-        return null;
+    public Alquiler create(Alquiler alquiler) {
+        return repository.save(alquiler);
     }
 
     @Override
-    public void update(Rental alquilerDTO) {
-
+    public void update(Alquiler alquiler) {
+        repository.save(alquiler);
     }
 
     @Override
     public void delete(Integer idAlquiler) {
-
-    }
-
-    @Override
-    public Rental map(Rental alquilerDTO) {
-        return null;
-    }
-
-    @Override
-    public Rental map(Alquiler alquilerEntity) {
-        return null;
+        repository.deleteById(idAlquiler);
     }
 }
