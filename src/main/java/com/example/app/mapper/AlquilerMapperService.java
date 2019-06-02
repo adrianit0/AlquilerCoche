@@ -2,7 +2,7 @@ package com.example.app.mapper;
 
 import com.example.app.DTO.Rental;
 import com.example.app.model.Alquiler;
-import com.example.app.util.Util;
+import com.example.app.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,8 +19,8 @@ public class AlquilerMapperService implements MapperService<Rental, Alquiler> {
         entidad.setCliente(clienteMapperService.mapDtoToEntity(dto.getClient()));
         entidad.setCoche(cocheMapperService.mapDtoToEntity(dto.getCar()));
         entidad.setPrecio(dto.getPrice());
-        entidad.setFechaInicio(Util.stringToDate(dto.getStartDate()));
-        entidad.setFechaFin(Util.stringToDate(dto.getEndDate()));
+        entidad.setFechaInicio(DateUtil.stringToDate(dto.getStartDate()));
+        entidad.setFechaFin(DateUtil.stringToDate(dto.getEndDate()));
         return entidad;
     }
 
@@ -31,8 +31,8 @@ public class AlquilerMapperService implements MapperService<Rental, Alquiler> {
         dto.setClient(clienteMapperService.mapEntityToDto(entity.getCliente()));
         dto.setCar(cocheMapperService.mapEntityToDto(entity.getCoche()));
         dto.setPrice(entity.getPrecio());
-        dto.setStartDate(Util.dateToString(entity.getFechaInicio()));
-        dto.setEndDate(Util.dateToString(entity.getFechaFin()));
+        dto.setStartDate(DateUtil.dateToString(entity.getFechaInicio()));
+        dto.setEndDate(DateUtil.dateToString(entity.getFechaFin()));
         return dto;
     }
 }

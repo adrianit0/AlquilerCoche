@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -38,9 +39,8 @@ public class ClienteController {
         Page<Cliente> clientes = clienteService.findAll(page, size);
         return clientes.map(x -> clienteMapperService.mapEntityToDto(x));
     }
-
     @PostMapping
-    public ResponseEntity<Client> insertCliente (@RequestBody Client dto) {
+    public ResponseEntity<Client> insertCliente (@Valid @RequestBody Client dto) {
         // ID del coche, por si existe
         Optional<Integer> idCliente = Optional.of(dto)
                 .map(clienteMapperService::mapDtoToEntity)
@@ -63,7 +63,8 @@ public class ClienteController {
     }
 
     @PutMapping (value = Constantes.URL_BY_ID)
-    public ResponseEntity<? extends Client> updateCliente (@PathVariable("id") Integer id, @RequestBody Client dto) {
+    @SuppressWarnings("Duplicates")
+    public ResponseEntity<? extends Client> updateCliente (@PathVariable("id") Integer id, @Valid @RequestBody Client dto) {
         boolean existe = Optional.of(id)
                 .map(clienteService::existsById)
                 .orElse(false);
@@ -78,7 +79,7 @@ public class ClienteController {
     }
 
     @DeleteMapping (value = Constantes.URL_BY_ID)
-    public ResponseEntity<? extends Client> deleteCliente (@PathVariable Integer id) throws NotFoundException {
+    public ResponseEntity<? extends Client> deleteCliente (@PathVariable Integer id) {
         Boolean existe = Optional.of(id)
                 .map(clienteService::existsById)
                 .orElse(false);

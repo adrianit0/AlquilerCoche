@@ -8,5 +8,5 @@ spring:
     datasource:
         url: jdbc:mysql://127.0.0.1:3306/alquilercoches?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
         username: root
-        password:
+        password: root
         driver-class-name: com.mysql.cj.jdbc.Driver

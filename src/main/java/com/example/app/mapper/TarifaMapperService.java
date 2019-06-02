@@ -2,7 +2,7 @@ package com.example.app.mapper;
 
 import com.example.app.DTO.Rate;
 import com.example.app.model.Tarifa;
-import com.example.app.util.Util;
+import com.example.app.util.DateUtil;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,8 +12,8 @@ public class TarifaMapperService implements MapperService<Rate, Tarifa> {
     public Tarifa mapDtoToEntity(Rate dto) {
         Tarifa entity = new Tarifa();
         entity.setId(dto.getId());
-        entity.setFechaInicio(Util.stringToDate(dto.getStartDate()));
-        entity.setFechaFin(Util.stringToDate(dto.getEndDate()));
+        entity.setFechaInicio(DateUtil.stringToDate(dto.getStartDate()));
+        entity.setFechaFin(DateUtil.stringToDate(dto.getEndDate()));
         return entity;
     }
 
@@ -22,8 +22,8 @@ public class TarifaMapperService implements MapperService<Rate, Tarifa> {
         Rate dto = new Rate();
         dto.setId(entity.getId());
         dto.setPrice(entity.getPrecio());
-        dto.setStartDate(Util.dateToString(entity.getFechaInicio()));
-        dto.setEndDate(Util.dateToString(entity.getFechaFin()));
+        dto.setStartDate(DateUtil.dateToString(entity.getFechaInicio()));
+        dto.setEndDate(DateUtil.dateToString(entity.getFechaFin()));
         return dto;
     }
 }

@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface IAlquilerService {
     Optional<Alquiler> findById(Integer id);
 
+    Boolean existsById (Integer id);
+
     Page<Alquiler> findAll(Integer page, Integer size);
 
     Alquiler create(Alquiler alquiler);

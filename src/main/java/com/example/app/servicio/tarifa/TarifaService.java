@@ -23,6 +23,11 @@ public class TarifaService implements ITarifaService {
     }
 
     @Override
+    public Boolean existsById( Integer id) {
+        return repository.existsById(id);
+    }
+
+    @Override
     public Page<Tarifa> findAll(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
 

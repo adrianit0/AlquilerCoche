@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface ITarifaService {
     Optional<Tarifa> findById(Integer id);
 
+    Boolean existsById (Integer id);
+
     Page<Tarifa> findAll(Integer page, Integer size);
 
     Tarifa create(Tarifa tarifa);

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -42,12 +43,13 @@ public class CocheController {
     }
 
     @PostMapping
+    @SuppressWarnings("Duplicates")
     /**
      * Inserta el coche a partir de un DTO. Devuelve error si la id del objeto a insertar ya existe
      * @param dto Coche a insertar
      * @return Respuesta con el servidor junto con el coche creado con su nueva id. (Codigos: 201, 400)
      * */
-    public ResponseEntity<Car> insertCoche (@RequestBody Car dto) {
+    public ResponseEntity<Car> insertCoche (@Valid @RequestBody Car dto) {
         // ID del coche, por si existe
         Optional<Integer> idCoche = Optional.of(dto)
                 .map(cocheMapperService::mapDtoToEntity)
@@ -75,7 +77,7 @@ public class CocheController {
      * @param dto Coche a actualizar
      * @return Respuesta con el servidor junto con el coche actualizado. (Codigos: 200, 404)
      * */
-    public ResponseEntity<? extends Car> updateCoche (@PathVariable("id") Integer id, @RequestBody Car dto) {
+    public ResponseEntity<? extends Car> updateCoche (@PathVariable("id") Integer id, @Valid @RequestBody Car dto) {
         Boolean existe = Optional.of(id)
                 .map(cocheService::existsById)
                 .orElse(false);
@@ -98,7 +100,7 @@ public class CocheController {
      * @param id ID del coche a eliminar
      * @return Respuesta con el servidor junto con el coche actualizado. (Codigos: 200, 400)
      * */
-    public ResponseEntity<? extends Car> deleteCar (@PathVariable Integer id) throws NotFoundException {
+    public ResponseEntity<? extends Car> deleteCar (@PathVariable Integer id) {
         Boolean existe = Optional.of(id)
                 .map(cocheService::existsById)
                 .orElse(false);

@@ -24,6 +24,11 @@ public class AlquilerService implements IAlquilerService {
     }
 
     @Override
+    public Boolean existsById (Integer id) {
+        return repository.existsById(id);
+    }
+
+    @Override
     public Page<Alquiler> findAll(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
 
